@@ -1,0 +1,30 @@
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Go outputs
+/cloudburst
+/dist/
+*.test
+coverage.out
+
+# Terraform local state and initialization data
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+!**/*.tfvars.example
+
+# Mise local state
+.mise/
+
+# Temporary files
+tmp/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/

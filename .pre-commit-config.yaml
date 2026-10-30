@@ -1,0 +1,94 @@
+default_install_hook_types: [pre-commit, commit-msg]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.19.3
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+  - repo: local
+    hooks:
+      - id: cspell
+        name: cspell
+        entry: cspell-cli
+        language: system
+        types: [text]
+        stages: [pre-commit]
+        args:
+          - --config
+          - .cspell.config.yaml
+          - --no-progress
+          - --no-must-find-files
+          - --gitignore
+          - .
+
+      - id: markdownlint-cli2
+        name: markdownlint-cli2
+        entry: markdownlint-cli2
+        language: system
+        types: [markdown]
+
+      - id: jactionlint
+        name: jactionlint
+        entry: jactionlint
+        language: system
+        files: ^\.github/(workflows/.*\.ya?ml|dependabot\.ya?ml)$
+
+      - id: zizmor
+        name: zizmor
+        entry: zizmor --offline --config .github/zizmor.yml
+        language: system
+        files: ^\.github/workflows/.*\.ya?ml$
+
+      - id: gofmt
+        name: gofmt
+        entry: gofmt -w
+        language: system
+        files: \.go$
+        types: [file]
+
+      - id: goimports
+        name: goimports
+        entry: go tool goimports -w
+        language: system
+        files: \.go$
+        types: [file]
+
+      - id: go-vet
+        name: go vet
+        entry: go vet ./...
+        language: system
+        files: \.go$
+        pass_filenames: false
+
+      - id: golangci-lint
+        name: golangci-lint
+        entry: golangci-lint run
+        language: system
+        files: \.go$
+        pass_filenames: false
+
+      - id: go-mod-tidy
+        name: go mod tidy -diff
+        entry: go mod tidy -diff
+        language: system
+        files: ^(go\.mod|go\.sum|.*\.go)$
+        pass_filenames: false
+
+      - id: terraform-fmt
+        name: terraform fmt
+        entry: terraform fmt -recursive infra
+        language: system
+        files: ^infra/.*\.tf$
+        pass_filenames: false
