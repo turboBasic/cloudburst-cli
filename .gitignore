@@ -1,0 +1,23 @@
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Go outputs
+/cloudburst
+/dist/
+*.test
+coverage.out
+
+# Mise local state
+.mise/
+
+# Temporary files
+tmp/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,13 @@
+[settings]
+lockfile = true
+
+[tools]
+go = "1.27.3"
+golangci-lint = "2.15.0"
+jactionlint = { version = "2.4.0", workflow = "release.yaml" }
+just = "1.58.0"
+"npm:cspell-cli" = "10.0.1"
+"npm:markdownlint-cli2" = "0.23.2"
+prek = "0.5.2"
+shellcheck = "0.11.0"
+taplo = "0.10.0"
